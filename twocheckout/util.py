@@ -6,12 +6,7 @@ class Util:
         if 'recurring' in sale:
             invoice = sale
         else:
-            invoices = dict()
-            sale = sale.invoices
-            for invoice in sale:
-                invoices[i] = invoice
-                i += 1
-            invoice = max(invoices.values())
+            invoice = sale.last_invoice()
         i = 0
         lineitems = dict()
         for lineitem_id in invoice.lineitems:

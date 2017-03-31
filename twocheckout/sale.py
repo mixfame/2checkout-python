@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+from datetime import datetime
+
 from .api_request import Api
 from .util import Util
 from .twocheckout import Twocheckout
@@ -6,6 +10,17 @@ from .twocheckout import Twocheckout
 class Sale(Twocheckout):
     def __init__(self, dict_):
         super(self.__class__, self).__init__(dict_)
+
+    def last_invoice(self):
+        if not len(self.get('invoices', [])):
+            return
+        invoices = self.get('invoices', [])[:]
+        invoices.sort(
+                key=lambda invoice: datetime.strptime(
+                    invoice.get('date_placed', ''),
+                    '%Y-%m-%d %H:%M:%S'),
+                reverse=True)
+        return invoices[0]
 
     @classmethod
     def find(cls, params=None):
