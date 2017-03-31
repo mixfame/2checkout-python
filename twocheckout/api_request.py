@@ -37,14 +37,14 @@ class Api:
             binary_data = data.encode('ascii')
             req = urllib.request.Request(url, binary_data, headers)
             raw_data = urllib.request.urlopen(req).read()
-            result = raw_data.decode('utf-8')
+            result = raw_data.decode('utf-8', 'ignore')
             return json.loads(result)
         except urllib.error.HTTPError as e:
             if not hasattr(e, 'read'):
                 raise TwocheckoutError(e.code, e.msg)
             else:
                 raw_data = e.read()
-                result = raw_data.decode('utf-8')
+                result = raw_data.decode('utf-8', 'ignore')
                 exception = json.loads(result)
                 if method == 'authService':
                     raise TwocheckoutError(exception['exception']['errorCode'], exception['exception']['errorMsg'])
