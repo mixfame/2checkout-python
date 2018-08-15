@@ -16,14 +16,14 @@ class Coupon(Twocheckout):
     def find(cls, params=None):
         if params is None:
             params = dict()
-        result = cls(Api.call('products/detail_coupon', params))
+        result = cls(Api.call('products/detail_coupon', params, http_method='GET'))
         return result.coupon
 
     @classmethod
     def list(cls, params=None):
         if params is None:
             params = dict()
-        return cls(Api.call('products/list_coupons', params))
+        return cls(Api.call('products/list_coupons', params, http_method='GET'))
 
     def update(self, params=None):
         if params is None:

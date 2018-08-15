@@ -16,14 +16,14 @@ class Option(Twocheckout):
     def find(cls, params=None):
         if params is None:
             params = dict()
-        option = cls(Api.call('products/detail_option', params))
+        option = cls(Api.call('products/detail_option', params, http_method='GET'))
         return option.option[0]
 
     @classmethod
     def list(cls, params=None):
         if params is None:
             params = dict()
-        list = cls(Api.call('products/list_options', params))
+        list = cls(Api.call('products/list_options', params, http_method='GET'))
         return list.options
 
     def update(self, params=None):

@@ -29,13 +29,13 @@ class Api:
             Api.mode = credentials['mode']
 
     @classmethod
-    def call(cls, method, params=None):
+    def call(cls, method, params=None, http_method=None):
         data = cls.set_opts(method, params)
         url = cls.build_url(method)
         headers = cls.build_headers(method)
         try:
             binary_data = data.encode('ascii')
-            req = urllib.request.Request(url, binary_data, headers)
+            req = urllib.request.Request(url, binary_data, headers, method=http_method)
             raw_data = urllib.request.urlopen(req).read()
             result = raw_data.decode('utf-8', 'ignore')
             return json.loads(result)

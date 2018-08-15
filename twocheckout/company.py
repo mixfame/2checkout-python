@@ -11,6 +11,6 @@ class Company(Twocheckout):
         if params is None:
             params = dict()
         url = 'acct/detail_company_info'
-        response = cls(Api.call(url, params))
+        response = cls(Api.call(url, params, http_method='GET'))
         return response.vendor_company_info
 

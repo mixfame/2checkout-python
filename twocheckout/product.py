@@ -16,14 +16,14 @@ class Product(Twocheckout):
     def find(cls, params=None):
         if params is None:
             params = dict()
-        result = cls(Api.call('products/detail_product', params))
+        result = cls(Api.call('products/detail_product', params, http_method='GET'))
         return result.product
 
     @classmethod
     def list(cls, params=None):
         if params is None:
             params = dict()
-        result = cls(Api.call('products/list_products', params))
+        result = cls(Api.call('products/list_products', params, http_method='GET'))
         return result.products
 
     def update(self, params=None):

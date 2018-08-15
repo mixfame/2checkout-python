@@ -19,5 +19,5 @@ class Payment(Twocheckout):
         if params is None:
             params = dict()
         url = 'acct/list_payments'
-        response = cls(Api.call(url, params))
+        response = cls(Api.call(url, params, http_method='GET'))
         return response.payments

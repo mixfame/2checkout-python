@@ -11,5 +11,5 @@ class Contact(Twocheckout):
         if params is None:
             params = dict()
         url = 'acct/detail_contact_info'
-        response = cls(Api.call(url, params))
+        response = cls(Api.call(url, params, http_method='GET'))
         return response.vendor_contact_info

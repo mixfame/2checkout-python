@@ -26,14 +26,14 @@ class Sale(Twocheckout):
     def find(cls, params=None):
         if params is None:
             params = dict()
-        response = cls(Api.call('sales/detail_sale', params))
+        response = cls(Api.call('sales/detail_sale', params, http_method='GET'))
         return response.sale
 
     @classmethod
     def list(cls, params=None):
         if params is None:
             params = dict()
-        response = cls(Api.call('sales/list_sales', params))
+        response = cls(Api.call('sales/list_sales', params, http_method='GET'))
         return response.sale_summary
 
     def refund(self, params=None):
