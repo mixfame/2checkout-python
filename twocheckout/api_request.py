@@ -2,6 +2,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import json
+import ssl
 from .error import TwocheckoutError
 
 
@@ -36,7 +37,10 @@ class Api:
         try:
             binary_data = data.encode('ascii')
             req = urllib.request.Request(url, binary_data, headers, method=http_method)
-            raw_data = urllib.request.urlopen(req).read()
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            raw_data = urllib.request.urlopen(req, context=ctx).read()
             result = raw_data.decode('utf-8', 'ignore')
             return json.loads(result)
         except urllib.error.HTTPError as e:
